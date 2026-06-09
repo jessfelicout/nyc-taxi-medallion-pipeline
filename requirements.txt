@@ -1,0 +1,20 @@
+# NYC Taxi Medallion Architecture Pipeline - Python Dependencies
+#
+# This file lists all Python packages required to run the pipeline.
+# Install with: pip install -r requirements.txt
+#
+# Note: PySpark is pre-installed on Databricks clusters and does not need
+# to be listed here when running on Databricks.
+
+# Core dependencies
+requests>=2.28.0
+
+# Data processing (if running outside Databricks)
+pyspark>=3.4.0
+
+# Development and testing (optional)
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Type checking (optional)
+mypy>=1.0.0
