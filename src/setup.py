@@ -68,12 +68,6 @@ def setup_catalog(spark: SparkSession) -> None:
         )
     """)
     print(f"Schema GOLD: {CATALOG}.{GOLD_SCHEMA}")
-
-    # 6. Summary of Bronze tables to be created
-    print(f"\n Bronze tables to be created:")
-    for taxi_type in TAXI_TYPES:
-        print(f"  - {CATALOG}.{BRONZE_SCHEMA}.{taxi_type}_trips")
-
     print("\nSetup completed successfully!")
 
 
