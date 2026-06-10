@@ -1,6 +1,6 @@
 # NYC Taxi Medallion Architecture Pipeline
 
-A production-ready data pipeline implementing the **Medallion Architecture** (Bronze, Silver, Gold) for processing NYC Taxi & Limousine Commission (TLC) trip data using **Databricks**, **Delta Lake**, **Unity Catalog**, and **Liquid Clustering**.
+A  data pipeline implementing the **Medallion Architecture** (Bronze, Silver, Gold) for processing NYC Taxi trip data using **Databricks**, **Delta Lake**, **Unity Catalog**, and **Liquid Clustering**.
 
 ## Overview
 
@@ -247,48 +247,6 @@ All tables include:
 * Adaptive optimization for changing query patterns
 * Optimized for temporal and geographic queries
 
-## Monitoring & Observability
-
-### Validate Data Quality
-
-```sql
--- Check date range in Silver
-SELECT 
-  MIN(pickup_date) as first_date,
-  MAX(pickup_date) as last_date,
-  COUNT(*) as total_trips
-FROM nyc_taxi.silver.yellow_trips_clean;
--- Expected: 2023-01-01 to 2023-05-31
-
--- Check Gold metrics
-SELECT 
-  COUNT(*) as total_trips,
-  ROUND(AVG(passenger_count), 2) as avg_passengers,
-  ROUND(AVG(total_amount), 2) as avg_fare,
-  ROUND(AVG(avg_speed_mph), 2) as avg_speed
-FROM nyc_taxi.gold.yellow_trips_gold;
-```
-
-### Delta Lake History
-
-```python
-# View version history (time travel)
-spark.sql("DESCRIBE HISTORY nyc_taxi.bronze.yellow_trips").display()
-
-# View table details
-spark.sql("DESCRIBE DETAIL nyc_taxi.silver.yellow_trips_clean").display()
-```
-
-## What Makes This Pipeline Production-Ready?
-
-* **Modularity**: Reusable Python modules organized by layer
-* **Idempotency**: Safe to re-run (skip existing downloads, overwrite mode)
-* **Data Quality**: 10+ validation rules with removal tracking
-* **Governance**: Schema properties, table comments, audit timestamps
-* **Performance**: Parallel downloads, Liquid Clustering, predicate pushdown
-* **Observability**: Detailed logging, quality statistics, Delta history
-* **Consistency**: Single source of configuration (`config.py`)
-* **Documentation**: Comprehensive comments in code and table metadata
 
 ## Next Steps
 
